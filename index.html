@@ -1,0 +1,69 @@
+<script> if(confirm("Join Our Telegram Channel @MomixTv")) { window.location.href = "https://t.me/momixtv" } </script>
+<html>  
+  
+<head>  
+    <meta name="referrer" content="no-referrer" />  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.6/shaka-player.ui.min.js" crossorigin="anonymous"></script>  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.6/controls.min.css" crossorigin="anonymous" />  
+</script>  
+<body bgcolor='black' style='margin:0'>  
+</script>  
+</head>  
+  
+<body>  
+    <center>  
+            <div data-shaka-player-container style='width: 100%; height: 100%'>  
+            <video autoplay data-shaka-player id='video' style='width:100%;height:100%;'></video>  
+        </div>  
+    </center>  
+    <script>  
+        const manifestUri = "https://linearjitp-playback.astro.com.my/dash-wv/linear/2604/default_primary.mpd";  
+        async function init() {  
+            const video = document.getElementById('video');  
+            const ui = video['ui'];  
+            const controls = ui.getControls();  
+            const player = controls.getPlayer();  
+            window.player = player;  
+            window.ui = ui;  
+            player.configure({  
+                drm: {  
+                    "clearKeys": {  
+                        'efda647dad723563b625be8c05ee6110': '6776985938b332164b97b81fe566a34a'  
+                    }  
+                }  
+            });  
+            player.addEventListener('error', onPlayerErrorEvent);  
+            controls.addEventListener('error', onUIErrorEvent);  
+            try {  
+                await player.load(manifestUri);  
+                console.log('The video has now been loaded!');  
+            } catch (error) {  
+                onPlayerError(error);  
+        }}  
+  
+        function onPlayerErrorEvent(errorEvent) {  
+            onPlayerError(event.detail);  
+        }  
+  
+        function onPlayerError(error) {  
+            console.error('Error code', error.code, 'object', error);  
+        }  
+  
+        function onUIErrorEvent(errorEvent) {  
+            onPlayerError(event.detail);  
+        }  
+  
+        function initFailed(errorEvent) {  
+            console.error('Unable to load the UI library!');  
+        }  
+        document.addEventListener('shaka-ui-loaded', init);  
+        document.addEventListener('shaka-ui-load-failed', initFailed);  
+    </script>  
+</body>  
+  
+</html>
+
+<script disable-devtool-auto='true' src=   
+  'https://cdn.jsdelivr.net/npm/disable-devtool' clear-log='true'   
+  disable-select='true' disable-copy='true' disable-cut='true'   
+  disable-paste='true'></script>
